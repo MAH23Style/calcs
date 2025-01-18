@@ -3,6 +3,10 @@ function calculateBMI() {
   const height = parseFloat(document.getElementById("height").value);
   const bmi = (weight / height / height) * 10000;
   document.getElementById("bmi-result").innerHTML = Math.round(bmi * 100) / 100;
+  if (document.getElementById("bmi-result").innerHTML === "NaN") {
+    document.getElementById("bmi-result").innerHTML =
+      "Please enter a valid number.";
+  }
 }
 
 function calculateAge() {
@@ -10,7 +14,7 @@ function calculateAge() {
   var dob = new Date(userinput);
 
   if (userinput == null || userinput == "") {
-    window.alert("Please provide a date");
+    document.getElementById("age-result").innerHTML = "Please provide a date";
   } else {
     var dobYear = dob.getYear();
     var dobMonth = dob.getMonth();
