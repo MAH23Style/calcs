@@ -1,13 +1,30 @@
 function calculateBMI() {
   const weight = parseFloat(document.getElementById("weight").value);
   const height = parseFloat(document.getElementById("height").value);
-  const bmi = (weight / height / height) * 10000;
-  document.getElementById("bmi-result").innerHTML = Math.round(bmi * 100) / 100;
-  if (document.getElementById("bmi-result").innerHTML === "NaN") {
-    document.getElementById("bmi-result").innerHTML =
-      "Please enter a valid number.";
+  
+  if (isNaN(weight) || isNaN(height) || height === 0) {
+    document.getElementById("bmi-result").innerHTML = "Please enter a valid number.";
+    return;
+  }
+  
+  const bmi = (weight / (height * height)) * 10000;
+  const bmiRange = bmiRangeCalc(bmi);
+  document.getElementById("bmi-result").innerHTML =
+    Math.round(bmi * 100) / 100 + " - " + bmiRange;
+}
+
+function bmiRangeCalc(bmi) {
+  if (bmi < 18.5) {
+    return "Underweight";
+  } else if (bmi >= 18.5 && bmi < 25) {
+    return "Normal weight";
+  } else if (bmi >= 25 && bmi < 30) {
+    return "Overweight";
+  } else {
+    return "Obese";
   }
 }
+
 
 function calculateAge() {
   var userinput = document.getElementById("birthdate").value;
